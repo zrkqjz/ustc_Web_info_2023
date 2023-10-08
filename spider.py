@@ -95,13 +95,12 @@ def parse_movie(text):
     with open("data\data.json", "w", encoding='utf-8') as file:
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def scrape():
+def scrape_to_txt():
     for n in range(0, len(idList)):
         text = scrape_ID(next_ID())
         with open(f'txt\{n}.txt', 'w', encoding='utf-8') as file:
             file.write(text)
-        if n % 10 == 0 :
-            print(f'{n} done \n')
+            print(f'{n}/2400 done \n')
 
     '''
         parse_movie(text)
@@ -109,13 +108,18 @@ def scrape():
         json.dump(data, file, indent=2, ensure_ascii=False)
     '''
     
-
+def scrape():
+    for n in range(0, len(idList)):
+        text = scrape_ID(next_ID())
+        with open(f'txt\{n}.txt', 'w', encoding='utf-8') as file:
+            file.write(text)
+            print(f'{n}/2400 done \n')
+        parse_movie(text)
+    with open("data\data.json", "w", encoding='utf-8') as file:
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def main():
-    text = scrape_ID(1084336)
-    print(text)
-    with open(f'1084336.txt', 'w', encoding='utf-8') as file:
-        file.write(text)
+    scrape_to_txt()
 
 if __name__ == '__main__':
     main()
