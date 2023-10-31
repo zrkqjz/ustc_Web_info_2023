@@ -236,3 +236,7 @@ DEBUG:urllib3.connectionpool:https://movie.douban.com:443 "GET /subject/3742360/
 INFO:root:scraping https://movie.douban.com/subject/1292052/?from=showing...
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): movie.douban.com:443
 DEBUG:urllib3.connectionpool:https://movie.douban.com:443 "GET /subject/1292052/?from=showing HTTP/1.1" 200 None
+INFO:root:scraping https://movie.douban.com/subject/1292052/?from=showing...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): movie.douban.com:443
+DEBUG:urllib3.connectionpool:https://movie.douban.com:443 "GET /subject/1292052/?from=showing HTTP/1.1" 302 None
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): sec.douban.com:443
