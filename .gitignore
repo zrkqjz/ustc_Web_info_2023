@@ -2,4 +2,3 @@ src/stage1/__pycache__/*
 src/stage1/txt/*
 src/stage1/log/parse_failed.log
 src/stage1/log/exception.txt
-src/stage1/data/*
