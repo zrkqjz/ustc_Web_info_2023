@@ -1,4 +1,5 @@
-txt/*
-1084336.txt
-__pycache__/parse.cpython-311.pyc
-__pycache__/spider.cpython-311.pyc
+src/stage1/__pycache__/*
+src/stage1/txt/*
+src/stage1/log/parse_failed.log
+src/stage1/log/exception.txt
+src/stage1/data/*

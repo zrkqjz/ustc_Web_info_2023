@@ -1,17 +1,38 @@
 import pandas
 import requests
+import re
 import logging
 import json
 import parse
-from lxml import etree
+import fake_useragent
 
 idList = pandas.concat([pandas.read_csv('Movie_id.csv', header=None) , pandas.read_csv('Book_id.csv', header=None)])
 curID = -1
-headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.36'}
+headers = {'User-Agent': str(fake_useragent.UserAgent().random)}
 BASE_URL = 'https://movie.douban.com'
 movieData = []
 bookData = []
-logging.basicConfig(filename='log\\scrape_failed.log', level=logging.DEBUG)
+logging.basicConfig(filename='log\\scrape_failed.log', level=logging.ERROR)
+
+def get_proxy():
+    try:
+        PROXY_API_URL = "https://h.shanchendaili.com/api.html?action=get_ip&key=HUe820e7971028093030zNPr&time=10" \
+                        "&count=1&protocol=http&type=json&only=1 "
+        proxy_json = requests.get(PROXY_API_URL).text
+        server = re.findall("(?<=\"sever\":\").*?(?=\")",
+                            proxy_json)[0]
+        port = re.findall("(?<=\"port\":).*?(?=,)",
+                          proxy_json)[0]
+        host = server + ":" + port
+    except:
+        return None
+    proxy = {
+        'http': 'http://' + host,
+        'https': 'https://' + host,
+    }
+    return proxy
+
+proxy = get_proxy()
 
 def next_ID():
     '''
@@ -29,23 +50,31 @@ def scrape_ID(id):
         '''
         scrape a page with given url, return the text 
         '''
+        global proxy
+        reTry = 0
         logging.info('scraping %s...', url)
         try:
-            response = requests.get(url, headers= headers)
+            response = requests.get(url, headers= headers, timeout=8, proxies=proxy)
             if response.status_code == 200:
                 return response.text
+            elif reTry < 3:
+                while response.status_code != 200 and reTry < 3:
+                    proxy = get_proxy()
+                    response = requests.get(url, headers= headers, timeout=8, proxies=proxy)
+                    reTry += 1
             logging.error('get invalid status code %s while scraping %s \n', response.status_code, url)
         except requests.RequestException:
             logging.error('RequestException while scraping %s \n', url, exc_info=True)
 
-    def get_url():
+    def get_url(id):
+        global curID
         if curID <= 1200 :
-            url = f'{BASE_URL}/subject/{id}/?from=showing'
+            url = f'{BASE_URL}/subject/{id}'
         else :
             url = f'https://book.douban.com/subject/{id}'
         return url
     
-    index_url = get_url()
+    index_url = get_url(id)
     return scrape_page(index_url)
 
 def scrape_to_txt():
@@ -59,7 +88,7 @@ def scrape_to_txt():
             print(f'{curID} is None\n')
             with open(f'data\exception.txt', 'a', encoding='utf-8') as file:
                 file.write(f'{curID} is None\n')
-    
+          
 def scrape():
     for n in range(0, 1200):
         text = scrape_ID(next_ID())

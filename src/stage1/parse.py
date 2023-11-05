@@ -1,10 +1,13 @@
 from lxml import etree
 import json
 import logging
+import pandas
+import spider
 
 bookData = []
 movieData = []
 logging.basicConfig(filename='log\\parse_failed.log', level=logging.DEBUG)
+idList = pandas.concat([pandas.read_csv('Movie_id.csv', header=None) , pandas.read_csv('Book_id.csv', header=None)])
 
 def parse_movie(text):
     def parse_title():
@@ -13,22 +16,27 @@ def parse_movie(text):
     
     def parse_rating():
         rating = html.xpath('//div[@class="rating_self clearfix"]//strong/text()')
-        if rating != None:
+        if rating != []:
             return rating
         else:
             logging.error("get invalid rating while parse %s", parse_title())
     
     def parse_info():
         info = html.xpath('//*[@id="info"]/span/text() | //*[@id="info"]/span//a/text() | //*[@id="info"]/text() | //*[@id="info"]/span/span/text()')
-        if info != None:
+        if info != []:
             info = ' '.join(info)
             return info
         else:
             logging.error("get invalid info while parse %s", parse_title())
     
     def parse_desc():
-        desc = html.xpath('//span[@property="v:summary"]/text()')
-        if desc != None:
+        desc = html.xpath('//span[@class="all hidden"]/text()')
+        if desc == []:
+            desc = html.xpath('//span[@property="v:summary"]/text()')
+        #desc = html.xpath('//span[@property="v:summary"]/text() | //span[@class="all hidden"]/text()')
+        if desc != []:
+            for string in desc:
+                string = string.strip()
             desc = ' '.join(desc)
             return desc
         else:
@@ -36,7 +44,7 @@ def parse_movie(text):
     
     def parse_staff():
         staff = html.xpath('//li[@class="celebrity"]//span/text() | //li[@class="celebrity"]//span//a/text()')
-        if staff != None:
+        if staff != []:
             staff = ' '.join(staff)
             return staff
         else:
@@ -59,22 +67,22 @@ def parse_book(text):
     
     def parse_rating():
         rating = html.xpath('//*[@id="interest_sectl"]/div/div[2]/strong/text()')
-        if rating != None:
+        if rating != []:
             return rating
         else:
             logging.error("get invalid rating while parse %s", parse_title())
     
     def parse_info():
         info = html.xpath('//*[@id="info"]//*/text() | //*[@id="info"]/text()')
-        if info != None:
+        if info != []:
             info = ' '.join(info)
             return info
         else:
             logging.error("get invalid info while parse %s", parse_title())
     
     def parse_desc():
-        desc = html.xpath('//*[@id="link-report"]//span[@class="all hidden"]//p/text()')
-        if desc != None:
+        desc = html.xpath('//*[@id="link-report"]//p/text()')
+        if desc != []:
             desc = ' '.join(desc)
             return desc
         else:
@@ -82,7 +90,7 @@ def parse_book(text):
     
     def parse_staff():
         staff = html.xpath('//div[@class="intro"]/p/text()')
-        if staff != None:
+        if staff != []:
             staff = ' '.join(staff)
             return staff
         else:
@@ -115,11 +123,11 @@ def parse():
                 text = file.read()
             bookData.append(parse_book(text))
         except:
-            print(f'{n} is None')        
+            print(f'{n} is None')     
     with open("data\\bookData.json", "w", encoding='utf-8') as file:
         json.dump(bookData, file, indent=2, ensure_ascii=False)
 
 def main():
-        parse()
+    parse()
 if __name__ == '__main__':
     main()

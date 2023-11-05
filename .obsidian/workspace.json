@@ -1,0 +1,167 @@
+{
+  "main": {
+    "id": "ca0175a7dcf0f33c",
+    "type": "split",
+    "children": [
+      {
+        "id": "7e01d0d51fb0010f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5eace24bbe0d9c74",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "assert/Screenshot 2023-11-05 191039.png.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6dd7116dd0c8f09f",
+    "type": "split",
+    "children": [
+      {
+        "id": "73e5523f26d40289",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "149038b13e14df0e",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "7f83f9ff73e27f64",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "2985f60b10d24f75",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "76e8d3e803fe114a",
+    "type": "split",
+    "children": [
+      {
+        "id": "13852303ea60a5e1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "348dcc26deca8688",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "assert/Screenshot 2023-11-05 191039.png.md",
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "b685a127e30b0c16",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "assert/Screenshot 2023-11-05 191039.png.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "238275171c2d937d",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "1c64687b18dec33f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "assert/Screenshot 2023-11-05 191039.png.md"
+              }
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "5eace24bbe0d9c74",
+  "lastOpenFiles": [
+    "report/report.md",
+    "report/assert/Screenshot 2023-11-01 175526.png",
+    "report/assert/Screenshot 2023-11-05 192002.png",
+    "report/assert/Screenshot 2023-11-05 150411.png",
+    "report/assert/Screenshot 2023-11-05 160305.png",
+    "report/assert/Screenshot 2023-11-05 160423.png",
+    "report/assert/Screenshot 2023-11-05 165033.png",
+    "report/assert/Screenshot 2023-11-05 165422.png",
+    "report/assert/Screenshot 2023-11-05 191241.png",
+    "assert/Screenshot 2023-11-05 191039.png.md",
+    "assert",
+    "report/assert/Screenshot 2023-11-05 191039.png",
+    "report/assert/Screenshot 2023-11-05 183005.png",
+    "src/log/scrape_failed.log",
+    "report/draft.md"
+  ]
+}
