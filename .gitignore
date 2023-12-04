@@ -2,3 +2,10 @@ src/stage1/__pycache__/*
 src/stage1/txt/*
 src/stage1/log/parse_failed.log
 src/stage1/log/exception.txt
+src/lab2/stage1/__pycache__/*
+src/lab2/stage1/data/2step_entity_count.json
+src/lab2/stage1/data/2step_relation_count.json
+src/lab2/stage1/data/entity_1step.txt
+src/lab2/stage1/data/freebase_douban.gz
+src/lab2/stage1/data/KG_1step_filtered.txt
+src/lab2/stage1/data/KG_1step.txt
