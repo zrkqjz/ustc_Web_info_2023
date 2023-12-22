@@ -156,7 +156,7 @@ def count_2step():
             json.dump(myDict, file)
 
     relation_count = {}
-    entity_count = {}     
+    entity_count = {} 
 
     #一开始的578个电影不能被过滤掉
     _, given_movie = readMap()
@@ -177,7 +177,7 @@ def count_2step():
 def filter_2step():
 
     def eligible_entity(e):
-        if entity_count[e] > min_entity and entity_count[e] < max_entity:
+        if entity_count[e] > 20 and entity_count[e] < max_entity:
             return True
         else:
             return False
@@ -222,5 +222,8 @@ def main():
     print('time to filter 2 step KG:',end - start, '秒')
 
 if __name__ == '__main__':
-    main()
-
+    start = timeit.default_timer()
+    filter_2step()
+    end = timeit.default_timer()
+    print('time to filter 2 step KG:',end - start, '秒')
+    

@@ -29,9 +29,6 @@ def given_movie_map():
         fb_to_id[fb] = temp[1]
 
     return fb_to_id
-    
-    
-
 
 def entity_to_index():
 
@@ -95,10 +92,4 @@ def build():
             print(i,'not found, id:',given_movie_mapping[i])
 
 if __name__ == '__main__':
-    """ given_movie_mapping, _, _ = entity_to_index()
-    for key, value in given_movie_mapping.items():
-        if value == 203:
-            print('map 203 to',key)
-        elif value == 352:
-            print('map 352 to', key) """ 
     build()
