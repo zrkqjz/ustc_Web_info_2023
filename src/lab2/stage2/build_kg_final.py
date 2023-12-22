@@ -33,7 +33,8 @@ def entity_to_index():
             add(triplet[2])
 
     given_movie_mapping = {x: i for i, x in enumerate(given_movie)}
-    other_movie_mapping = {x: i for i, x in enumerate(other_movie)}
+    n = len(given_movie)
+    other_movie_mapping = {x: i + n for i, x in enumerate(other_movie)}
     relation_mapping = {x: i for i, x in enumerate(relation_set)}
 
     return given_movie_mapping, other_movie_mapping, relation_mapping
