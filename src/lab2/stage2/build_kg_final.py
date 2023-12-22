@@ -15,6 +15,24 @@ def readMap():
         movie_entity.append('<'+'http://rdf.freebase.com/ns/' + temp[1] +'>')
     return Map, set(movie_entity)
 
+def given_movie_map():
+    db_to_fb, _ = readMap()
+
+    with open('data/movie_id_map.txt', 'r') as file:
+        data = file.readlines()
+
+    fb_to_id = {}
+    for line in data:
+        # temp[0] = db, temp[1] = id
+        temp = line.split()
+        fb = db_to_fb[temp[0]]
+        fb_to_id[fb] = temp[1]
+
+    return fb_to_id
+    
+    
+
+
 def entity_to_index():
 
     def add(movie):
@@ -32,22 +50,33 @@ def entity_to_index():
             relation_set.add(triplet[1])
             add(triplet[2])
 
-    given_movie_mapping = {x: i for i, x in enumerate(given_movie)}
+    
+    given_movie_mapping = given_movie_map()
+
+    other_movie = list(other_movie)
+    other_movie.sort()
     n = len(given_movie)
-    other_movie_mapping = {x: i + n for i, x in enumerate(other_movie)}
-    relation_mapping = {x: i for i, x in enumerate(relation_set)}
+    other_movie_mapping = {other_movie[i]: i + n for i in range(len(other_movie))}
+
+    relation_set = list(relation_set)
+    relation_set.sort()
+    relation_mapping = {relation_set[i]: i for i in range(len(relation_set))}
 
     return given_movie_mapping, other_movie_mapping, relation_mapping
 
 def build():
     def entity_map(movie):
-        try:
-            return given_movie_mapping[movie]
-        except:
+        if movie in given_movie_mapping.keys():
+            v = given_movie_mapping[movie]
+            c.add(movie)
+            return v
+            # return given_movie_mapping[movie]
+        else:
             return other_entity_mapping[movie]
         
     given_movie_mapping, other_entity_mapping, relation_mapping = entity_to_index()
     text = [0 for i in range(3)]
+    c = set()
     try:
         os.remove('data/Douban/kg_final.txt')
     except:
@@ -61,7 +90,15 @@ def build():
                 text[1] = str(relation_mapping[triplet[1]])
                 text[2] = str(entity_map(triplet[2]))
                 output.write(' '.join(text) + '\n')
-    pass
+    for i in given_movie_mapping.keys():
+        if i not in c:
+            print(i,'not found, id:',given_movie_mapping[i])
 
 if __name__ == '__main__':
+    """ given_movie_mapping, _, _ = entity_to_index()
+    for key, value in given_movie_mapping.items():
+        if value == 203:
+            print('map 203 to',key)
+        elif value == 352:
+            print('map 352 to', key) """ 
     build()
